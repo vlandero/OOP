@@ -1,37 +1,17 @@
-//
-// Created by Vlad on 02.03.2022.
-//
-
 #ifndef OOP_BILET_H
 #define OOP_BILET_H
 #include <vector>
-#include <iostream>
-#include <cstdarg>
-#include "Persoana.h"
+#include "Zbor.h"
 
 class Bilet {
-    Persoana& posesor;
-    int id;
+    std::string id;
     double pret;
-    int nr_bagaje_incluse;
+    int bagajeCala;
+    int bagajeMana;
     bool masa_inclusa;
-    std::vector<std::string>escale;
+    std::vector<Zbor>zboruri;
 public:
-    //getters
-    int getId();
-    double getPret();
-    Persoana getPosesor();
-    int getBagaje();
-    bool getMasa();
-    std::vector<std::string> getEscale();
-    //setters
-    void setPosesor(Persoana& posesor_);
-    void setPret(double pret_);
-    void setBagaje(int bagaje);
-    void setMasa(bool masa);
-    void addEscala(std::string esc);
-    void removeEscala(std::string esc);
-    Bilet(double pret_,int bagaje,bool masa_inclusa_,Persoana& p,std::vector<std::string>escale_);
+    Bilet(std::string _id,double pret_,int bagajeCala_,int bagajeMana_,bool masa_inclusa_,std::vector<Zbor>zboruri_);
     friend std::ostream& operator<<(std::ostream& os,const Bilet& b);
     ~Bilet();
 };

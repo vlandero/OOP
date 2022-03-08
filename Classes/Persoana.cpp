@@ -4,17 +4,25 @@
 
 #include "Persoana.h"
 
-Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_):
-nume(nume_),
-prenume(prenume_),
+#include <utility>
+
+Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b):
+nume(std::move(nume_)),
+prenume(std::move(prenume_)),
 varsta(varsta_),
-CNP(CNP_){
+CNP(std::move(CNP_)),
+bilete(b){
+    this->id = 1;
     //std::cout<<"Persoana creata\n";
 }
 
 std::ostream &operator<<(std::ostream &os, const Persoana &p) {
     os<<p.nume<<' '<<p.prenume<<": "<<p.varsta<<" ani\n";
-    os<<"CNP: "<<p.CNP<<'\n';
+    os<<"CNP: "<<p.CNP<<"\n\n";
+    os<<"Bilete:\n\n";
+    for(unsigned long long i = 0; i < p.bilete.size(); ++i){
+        std::cout<<i+1<<":\n"<<p.bilete[i]<<'\n';
+    }
     return os;
 }
 
@@ -27,6 +35,7 @@ Persoana &Persoana::operator=(const Persoana &other) {
     this->prenume = other.prenume;
     this->varsta = other.varsta;
     this->CNP = other.CNP;
+    this->bilete = other.bilete;
     return *this;
 }
 
@@ -34,6 +43,7 @@ Persoana::Persoana(const Persoana &other):
     nume(other.nume),
     prenume(other.prenume),
     varsta(other.varsta),
-    CNP(other.CNP){
+    CNP(other.CNP),
+    bilete(other.bilete){
     //std::cout<<"Constructor de copiere apelat\n";
 }
