@@ -6,7 +6,8 @@
 
 #include <utility>
 
-Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b):
+Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b,std::string _id):
+id(_id),
 nume(std::move(nume_)),
 prenume(std::move(prenume_)),
 varsta(varsta_),
@@ -36,14 +37,17 @@ Persoana &Persoana::operator=(const Persoana &other) {
     this->varsta = other.varsta;
     this->CNP = other.CNP;
     this->bilete = other.bilete;
+    this->id = other.id;
     return *this;
 }
 
 Persoana::Persoana(const Persoana &other):
+    id(other.id),
     nume(other.nume),
     prenume(other.prenume),
     varsta(other.varsta),
     CNP(other.CNP),
-    bilete(other.bilete){
+    bilete(other.bilete)
+    {
     //std::cout<<"Constructor de copiere apelat\n";
 }
