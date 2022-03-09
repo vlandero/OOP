@@ -12,7 +12,7 @@ nume(std::move(nume_)),
 prenume(std::move(prenume_)),
 varsta(varsta_),
 CNP(std::move(CNP_)),
-bilete(b){
+bilete(std::move(b)){
     this->id = 1;
     //std::cout<<"Persoana creata\n";
 }
