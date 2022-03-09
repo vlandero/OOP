@@ -7,7 +7,7 @@
 #include <utility>
 
 Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b,std::string _id):
-id(_id),
+id(std::move(_id)),
 nume(std::move(nume_)),
 prenume(std::move(prenume_)),
 varsta(varsta_),
