@@ -1,0 +1,16 @@
+5
+Paris Charles de Gaulle Airport
+CDG
+Paris
+Rome Ciampino Giovan Battista Pastine Airport
+CIA
+Rome
+Henri Coanda International Airport
+OTP
+Bucharest
+Vienna International Airport
+VIE
+Vienna
+Ronald Reagan Washington National Airport
+DCA
+Washington

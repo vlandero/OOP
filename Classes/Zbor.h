@@ -3,22 +3,28 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <fstream>
+#include <ctime>
 
-struct Ora{
-    int h;
-    int min;
-};
 
 class Zbor{
-    int id;
+    std::string id;
+    int max_pasageri{};
     std::string plecare;
     std::string destinatie;
-    Ora oraPlecare{};
-    Ora oraSosire{};
+    tm detalii_plecare{};
+    tm detalii_sosire{};
 public:
+    [[nodiscard]] const std::string &getPlecare() const;
+
+    [[nodiscard]] const std::string &getDestinatie() const;
+
+    [[nodiscard]] const std::string &getId() const;
     friend std::ostream& operator<<(std::ostream& os,const Zbor& z);
-    Zbor(std::string plecare_,std::string destinatie_,int plecare_h,int plecare_min,int sosire_h,int sosire_min);
+    Zbor(std::string plecare_,std::string destinatie_, int max_pas,std::tm plecare, std::tm sosire,std::string ID);
+    explicit Zbor(std::istream &in);
     ~Zbor();
+    Zbor() = default;
 };
 
 

@@ -17,9 +17,9 @@ std::ostream &operator<<(std::ostream &os, const Bilet& b) {
     os<<"Pret bilet: "<<b.pret<<" euro\n";
     os<<"Bagaje de cala incluse: "<<b.bagajeCala<<'\n';
     os<<"Bagaje de mana incluse: "<<b.bagajeMana<<'\n';
-    os<<"Masa inclusa: "<<(b.masa_inclusa == 1 ? "Da" : "Nu")<<'\n';
-    for(const auto & i : b.zboruri)
-        os<<i<<'\n';
+    os<<"Masa inclusa: "<<(b.masa_inclusa ? "Da" : "Nu")<<'\n';
+    for(const auto & zbor : b.zboruri)
+        os<<zbor<<'\n';
     return os;
 }
 Bilet::~Bilet() {
