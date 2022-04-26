@@ -10,7 +10,6 @@
 #include <fstream>
 #include "Zbor.h"
 #include "Angajat.h"
-#include "Aeroport.h"
 
 
 class Aplicatie {
@@ -18,8 +17,8 @@ class Aplicatie {
     std::ifstream fin_aeroport{"files/aeroporturi.txt"};
     std::unordered_map<unsigned long long,std::shared_ptr<Persoana>>persoane;
     std::unordered_map<std::string,Aeroport>aeroporturi;
-    std::unordered_map<std::string,Bilet>bilete;
-    std::unordered_map<std::string,Zbor>zboruri;
+    std::unordered_map<unsigned long long,Bilet>bilete;
+    std::unordered_map<unsigned long long,Zbor>zboruri;
     Aplicatie() = default;
 
     void checkAeroporturi();

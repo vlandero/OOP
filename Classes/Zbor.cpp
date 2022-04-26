@@ -1,16 +1,16 @@
 #include "Zbor.h"
 
 #include <utility>
-
-Zbor::Zbor(std::string plecare_, std::string destinatie_, int max_pas, std::tm plecare,std::tm sosire,std::string ID):
-    id(std::move(ID)),
+unsigned long long Zbor::id_max = 0;
+Zbor::Zbor(std::string plecare_, std::string destinatie_, int max_pas, std::tm plecare,std::tm sosire):
     max_pasageri(max_pas),
     plecare(std::move(plecare_)),
     destinatie(std::move(destinatie_)),
     detalii_plecare(plecare),
     detalii_sosire(sosire)
 {
-//    nr_zboruri++;
+    id = id_max;
+    id_max++;
 }
 
 Zbor::~Zbor() = default;
@@ -27,9 +27,8 @@ std::ostream &operator<<(std::ostream &os, const Zbor &z) {
 Zbor::Zbor(std::istream &in) {
     //id  max_pasageri  abreviere plecare  abreviere sosire \n data ora plecare \n data ora sosire
     //data ora sunt de format an luna zi ora minut
-    std::string ID;
     int maxpas;
-    in>>ID>>maxpas;
+    in>>maxpas;
     std::string abvplec,abvsos;
     in>>abvplec>>abvsos;
 
@@ -50,7 +49,8 @@ Zbor::Zbor(std::istream &in) {
     tms.tm_mon = luna - 1;
     tms.tm_mday = zi;
 
-    this->id = ID;
+    this->id = id_max;
+    id_max++;
     this->max_pasageri = maxpas;
     this->plecare = abvplec;
     this->destinatie = abvsos;
@@ -58,7 +58,7 @@ Zbor::Zbor(std::istream &in) {
     this->detalii_sosire = tms;
 }
 
-const std::string &Zbor::getId() const {
+const unsigned long long &Zbor::getId() const {
     return id;
 }
 

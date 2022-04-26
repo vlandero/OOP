@@ -8,20 +8,21 @@
 
 
 class Zbor{
-    std::string id;
+    unsigned long long id;
     int max_pasageri{};
     std::string plecare;
     std::string destinatie;
     tm detalii_plecare{};
     tm detalii_sosire{};
 public:
+    static unsigned long long id_max;
     [[nodiscard]] const std::string &getPlecare() const;
 
     [[nodiscard]] const std::string &getDestinatie() const;
 
-    [[nodiscard]] const std::string &getId() const;
+    [[nodiscard]] const unsigned long long &getId() const;
     friend std::ostream& operator<<(std::ostream& os,const Zbor& z);
-    Zbor(std::string plecare_,std::string destinatie_, int max_pas,std::tm plecare, std::tm sosire,std::string ID);
+    Zbor(std::string plecare_,std::string destinatie_, int max_pas,std::tm plecare, std::tm sosire);
     explicit Zbor(std::istream &in);
     ~Zbor();
     Zbor() = default;

@@ -69,7 +69,7 @@ void Persoana::citire(std::istream &is,std::ostream &os) {
         verifCNP(cnp);
     }
     catch(eroare_consola& err){
-        throw err;
+        throw;
     };
     os<<"Introduceti varsta\n";
     is>>V;
@@ -77,7 +77,7 @@ void Persoana::citire(std::istream &is,std::ostream &os) {
         v = verifInt(V);
     }
     catch (eroare_consola& err){
-        throw err;
+        throw;
     }
     nume = Nume;
     prenume = Prenume;
@@ -101,7 +101,7 @@ std::shared_ptr<Persoana> Persoana::create(std::istream &is) {
         p->citire(is,std::cout);
     }
     catch (eroare_consola& err){
-        throw err;
+        throw;
     }
 
     return p;

@@ -14,6 +14,10 @@ void Aplicatie::citire_fisiere() {
     for(i = 0; i < n; ++i){
         Zbor z{fin_zbor};
         this->zboruri[z.getId()] = z;
+        if(aeroporturi.find(this->zboruri[z.getId()].getPlecare()) == aeroporturi.end())
+            throw eroare_fisier("Aeroport inexistent");
+        if(aeroporturi.find(this->zboruri[z.getId()].getDestinatie()) == aeroporturi.end())
+            throw eroare_fisier("Aeroport inexistent");
         this->aeroporturi[this->zboruri[z.getId()].getPlecare()].addPlecare(z);
         this->aeroporturi[this->zboruri[z.getId()].getDestinatie()].addSosire(z);
     }

@@ -38,7 +38,7 @@ void Angajat::citire(std::istream &is, std::ostream &os) {
         salary = verifInt(S);
     }
     catch(eroare_consola& err){
-        throw err;
+        throw;
     }
     os<<"Introduceti postul ocupat\n";
     is>>Post;
