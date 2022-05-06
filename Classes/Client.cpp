@@ -33,7 +33,7 @@ void Client::citire(std::istream &is, std::ostream &os) {
 
 void Client::calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) {
     double pret = 0;
-    int pretBagajCala = 0,pretBagajMana = 0;
+    double pretBagajCala = 0,pretBagajMana = 0;
     for(auto &z : b.getZboruri()){
         pretBagajCala += z.getDistanta() * Bilet::getPretBagajCalaKm();
         pretBagajMana += z.getDistanta() * Bilet::getPretBagajManaKm();

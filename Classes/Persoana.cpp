@@ -70,12 +70,8 @@ void Persoana::citire(std::istream &is,std::ostream &os) {
     is>>Prenume;
     os<<"Introduceti CNP\n";
     is>>cnp;
-    try{
-        verifCNP(cnp);
-    }
-    catch(eroare_consola& err){
-        throw;
-    };
+    verifCNP(cnp);
+
     os<<"Introduceti varsta\n";
     is>>V;
     try{

@@ -24,7 +24,7 @@ public:
     void citire(std::istream &in, std::ostream &out,std::unordered_map<std::string,Aeroport>aeroporturi);
     Bilet(std::istream &in,std::unordered_map<std::string,Aeroport>aeroporturi);
 
-    unsigned long long int getId() const;
+    [[nodiscard]] unsigned long long int getId() const;
     static double getPretBagajManaKm();
 
     static double getPretBagajCalaKm();

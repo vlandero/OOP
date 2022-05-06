@@ -16,7 +16,7 @@ minute(min)
 }
 
 int Time::getDifInMinutes(const Time& t1, const Time& t2) {
-    Time rez{};
+
     int days1 = 366,days2 = 366; // zile de la 1 ianuarie 2020 incoace
     days1 += t1.day + (t1.year - 2021) * 365;
     days2 += t2.day + (t2.year - 2021) * 365;

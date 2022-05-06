@@ -59,6 +59,7 @@ void Aplicatie::run() {
                 break;
             default:
                 std::cout<<"Nu ai introdus ce trebuie\n";
+                running = false;
                 break;
         }
     }

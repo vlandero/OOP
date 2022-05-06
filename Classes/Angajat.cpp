@@ -35,12 +35,7 @@ void Angajat::citire(std::istream &is, std::ostream &os) {
     Persoana::citire(is, os);
     os<<"Introduceti salariul\n";
     is>>S;
-    try{
-        salary = verifInt(S);
-    }
-    catch(eroare_consola& err){
-        throw;
-    }
+    salary = verifInt(S);
     std::string a;
     os<<"Introduceti aeroportul la care lucreaza\n";
     is>>a;
@@ -54,7 +49,7 @@ void Angajat::citire(std::istream &is, std::ostream &os) {
 
 void Angajat::calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) {
     double pret = 0;
-    int pretBagajCala = 0,pretBagajMana = 0;
+    double pretBagajCala = 0,pretBagajMana = 0;
     for(auto &z : b.getZboruri()){
         pretBagajCala += z.getDistanta() * Bilet::getPretBagajCalaKm();
         pretBagajMana += z.getDistanta() * Bilet::getPretBagajManaKm();

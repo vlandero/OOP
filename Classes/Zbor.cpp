@@ -70,7 +70,7 @@ const std::string &Zbor::getDestinatie() const {
     return destinatie;
 }
 
-int Zbor::getDistanta() const {
+double Zbor::getDistanta() const {
     return distanta;
 }
 

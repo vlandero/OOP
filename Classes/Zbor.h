@@ -9,7 +9,7 @@
 
 class Zbor{
     unsigned long long id{};
-    int distanta{}; //pret 0.32/km
+    double distanta{}; //pret 0.32/km
     std::string plecare;
     std::string destinatie;
     tm detalii_plecare{};
@@ -18,11 +18,11 @@ public:
     static unsigned long long id_max;
     [[nodiscard]] const std::string &getPlecare() const;
 
-    int getDistanta() const;
+    [[nodiscard]] double getDistanta() const;
 
-    const tm &getDetaliiPlecare() const;
+    [[nodiscard]] const tm &getDetaliiPlecare() const;
 
-    const tm &getDetaliiSosire() const;
+    [[nodiscard]] const tm &getDetaliiSosire() const;
 
     [[nodiscard]] const std::string &getDestinatie() const;
 
