@@ -20,7 +20,6 @@ public:
     void addPlecare(Zbor& z);
     void addSosire(Zbor& z);
 
-    [[maybe_unused]] [[nodiscard]] const std::vector<Zbor> &getSosiri() const;
     [[nodiscard]] const std::vector<Zbor> &getPlecari() const;
 
     [[nodiscard]] const std::string &getAbreviere() const;

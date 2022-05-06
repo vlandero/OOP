@@ -74,12 +74,7 @@ void Persoana::citire(std::istream &is,std::ostream &os) {
 
     os<<"Introduceti varsta\n";
     is>>V;
-    try{
-        v = verifInt(V);
-    }
-    catch (eroare_consola& err){
-        throw;
-    }
+    v = verifInt(V);
     nume = Nume;
     prenume = Prenume;
     CNP = cnp;
