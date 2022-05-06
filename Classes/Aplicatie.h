@@ -10,7 +10,9 @@
 #include <fstream>
 #include "Zbor.h"
 #include "Angajat.h"
-
+#include "VIP.h"
+#include "Client.h"
+#include <typeinfo>
 
 class Aplicatie {
     std::ifstream fin_zbor{"files/zboruri.txt"};

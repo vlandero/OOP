@@ -45,3 +45,11 @@ std::ostream &operator<<(std::ostream &os, const Aeroport &a) {
     a.afisare(os);
     return os;
 }
+
+const std::vector<Zbor> &Aeroport::getPlecari() const {
+    return plecari;
+}
+
+[[maybe_unused]] const std::vector<Zbor> &Aeroport::getSosiri() const {
+    return sosiri;
+}

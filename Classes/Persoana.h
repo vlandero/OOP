@@ -7,7 +7,7 @@
 class Persoana {
 
 protected:
-    unsigned long long id;
+    unsigned long long id{};
     std::string nume;
     std::string prenume;
     int varsta{};
@@ -17,15 +17,19 @@ protected:
     static void verifCNP(std::string cnp);
     static bool validDate(int year, int month, int day);
     Persoana() = default;
-public:
     static unsigned long long id_max;
+    std::string tip;
+public:
 
-    Persoana(std::string nume_,std::string prenume_,int varsta, std::string CNP_,std::vector<Bilet>b);
+    virtual void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) = 0;
+    [[nodiscard]] const std::string &getTip() const;
+
+    Persoana(std::string nume_,std::string prenume_,int varsta, std::string CNP_,std::vector<Bilet>b,std::string tip_);
     Persoana(const Persoana &other);
 
     virtual void citire(std::istream &is,std::ostream &out);
     virtual void afisare(std::ostream &os) const;
-    [[nodiscard]] virtual std::shared_ptr<Persoana> clone() const = 0;
+    [[maybe_unused]] [[nodiscard]] virtual std::shared_ptr<Persoana> clone() const = 0;
     static std::shared_ptr<Persoana> create(std::istream &is);
 
     friend std::ostream& operator<<(std::ostream& os,const Persoana& p);

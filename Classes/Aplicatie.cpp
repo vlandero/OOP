@@ -1,5 +1,6 @@
 #include "Aplicatie.h"
 
+
 void Aplicatie::citire_fisiere() {
     int n,i;
     //citire aeroporturi
@@ -56,6 +57,9 @@ void Aplicatie::run() {
             case 6:
                 running = false;
                 break;
+            default:
+                std::cout<<"Nu ai introdus ce trebuie\n";
+                break;
         }
     }
 }
@@ -92,7 +96,7 @@ void Aplicatie::addPersoana() {
     try{
         auto p = Persoana::create(std::cin);
         std::cout<<*p;
-        persoane[p->getId()] = p;
+        persoane[p->getId()] = p->clone();
     }
     catch (eroare_consola& err){
         std::cout<<err.what()<<'\n';
@@ -100,6 +104,31 @@ void Aplicatie::addPersoana() {
 }
 
 void Aplicatie::addBilet() {
+    try{
+        std::cout<<"Introduceti ID-ul persoanei pentru care vreti sa creati un bilet\n";
+        int ID;
+        std::string idd;
+        std::cin>>idd;
+        ID = Bilet::verifInt(idd);
+        if(persoane.find(ID) == persoane.end()){
+            std::cout<<"Persoana inexistenta\n";
+            return;
+        }
+        auto p = persoane[ID];
+        std::cout<<p->getTip()<<'\n';
+        auto b = Bilet();
+        b.citire(std::cin,std::cout,aeroporturi);
+        if(b.getZboruri().empty()){
+            std::cout<<"Nu exista zboruri\n";
+            return;
+        }
+        p->calculeazaPret(b,std::cin,std::cout);
+        p->addBilet(b);
+        bilete[b.getId()] = b;
 
+    }
+    catch (eroare_consola& err){
+        std::cout<<err.what()<<'\n';
+    }
 }
 

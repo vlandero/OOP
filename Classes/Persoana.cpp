@@ -4,14 +4,17 @@
 
 #include "Persoana.h"
 #include "Angajat.h"
+#include "Client.h"
+#include "VIP.h"
 #include <utility>
 unsigned long long Persoana::id_max = 0;
-Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b):
+Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b,std::string tip_):
 nume(std::move(nume_)),
 prenume(std::move(prenume_)),
 varsta(varsta_),
 CNP(std::move(CNP_)),
-bilete(std::move(b)){
+bilete(std::move(b)),
+tip(std::move(tip_)){
     id = id_max;
     id_max++;
 }
@@ -32,6 +35,7 @@ Persoana &Persoana::operator=(const Persoana &other) {
     this->CNP = other.CNP;
     this->bilete = other.bilete;
     this->id = other.id;
+    this->tip = other.tip;
     return *this;
 }
 
@@ -41,7 +45,8 @@ Persoana::Persoana(const Persoana &other):
     prenume(other.prenume),
     varsta(other.varsta),
     CNP(other.CNP),
-    bilete(other.bilete)
+    bilete(other.bilete),
+    tip(other.tip)
     {
     //std::cout<<"Constructor de copiere apelat\n";
 }
@@ -95,8 +100,12 @@ std::shared_ptr<Persoana> Persoana::create(std::istream &is) {
     try{
         if(functie == "Angajat" || functie == "angajat")
             p = std::make_shared<Angajat>();
+        else if(functie == "Client" || functie == "client")
+            p = std::make_shared<Client>();
+        else if(functie == "VIP" || functie == "vip")
+            p = std::make_shared<VIP>();
         else
-            throw eroare_consola{"Tip neexistent"};
+            throw eroare_consola{"Tip inexistent"};
 
         p->citire(is,std::cout);
     }
@@ -170,4 +179,8 @@ bool Persoana::validDate(int year, int month, int day) {
 
 unsigned long long int Persoana::getId() const {
     return id;
+}
+
+const std::string &Persoana::getTip() const {
+    return tip;
 }

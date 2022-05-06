@@ -2,8 +2,8 @@
 
 #include <utility>
 unsigned long long Zbor::id_max = 0;
-Zbor::Zbor(std::string plecare_, std::string destinatie_, int max_pas, std::tm plecare,std::tm sosire):
-    max_pasageri(max_pas),
+Zbor::Zbor(std::string plecare_, std::string destinatie_, int dist, std::tm plecare,std::tm sosire):
+    distanta(dist),
     plecare(std::move(plecare_)),
     destinatie(std::move(destinatie_)),
     detalii_plecare(plecare),
@@ -20,15 +20,15 @@ std::ostream &operator<<(std::ostream &os, const Zbor &z) {
     strftime(plecare,100,"%Y-%m-%d, %H:%M",&z.detalii_plecare);
     strftime(sosire,100,"%Y-%m-%d, %H:%M",&z.detalii_sosire);
     os<<z.plecare<<'('<<plecare<<")->"<<z.destinatie<<'('<<sosire<<")\n";
-    os<<"Maxim locuri: "<<z.max_pasageri<<'\n';
+    os<<"Distanta: "<<z.distanta<<" km\n";
     return os;
 }
 
 Zbor::Zbor(std::istream &in) {
     //id  max_pasageri  abreviere plecare  abreviere sosire \n data ora plecare \n data ora sosire
     //data ora sunt de format an luna zi ora minut
-    int maxpas;
-    in>>maxpas;
+    int dist;
+    in>>dist;
     std::string abvplec,abvsos;
     in>>abvplec>>abvsos;
 
@@ -51,7 +51,7 @@ Zbor::Zbor(std::istream &in) {
 
     this->id = id_max;
     id_max++;
-    this->max_pasageri = maxpas;
+    this->distanta = dist;
     this->plecare = abvplec;
     this->destinatie = abvsos;
     this->detalii_plecare = tmp;
@@ -68,4 +68,16 @@ const std::string &Zbor::getPlecare() const {
 
 const std::string &Zbor::getDestinatie() const {
     return destinatie;
+}
+
+int Zbor::getDistanta() const {
+    return distanta;
+}
+
+const tm &Zbor::getDetaliiPlecare() const {
+    return detalii_plecare;
+}
+
+const tm &Zbor::getDetaliiSosire() const {
+    return detalii_sosire;
 }

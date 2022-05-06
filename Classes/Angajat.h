@@ -8,15 +8,18 @@
 
 class Angajat : public Persoana {
     int salariu{};
+    static int reducere;
     std::string post;
+    std::string aeroport;
 public:
+    void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) override;
     void afisare(std::ostream &os) const override;
     void citire(std::istream &is,std::ostream &os) override;
     Angajat() = default;
     friend std::ostream& operator<<(std::ostream& os,const Angajat& p);
     Angajat(const std::string &nume, const std::string &prenume, int varsta, const std::string &cnp,
-            const std::vector<Bilet> &b, int salariu,std::string post_);
-    [[nodiscard]] std::shared_ptr<Persoana> clone() const override;
+            const std::vector<Bilet> &b, int salariu,std::string post_,std::string aeroport,std::string tip_);
+    [[maybe_unused]] [[nodiscard]] std::shared_ptr<Persoana> clone() const override;
     ~Angajat() override;
 };
 

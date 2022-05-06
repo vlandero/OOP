@@ -5,20 +5,40 @@
 #include "Aeroport.h"
 #include "Erori.cpp"
 #include <unordered_map>
+
 class Bilet {
-    unsigned long long id;
-    double pret;
-    int bagajeCala;
-    int bagajeMana;
-    bool masa_inclusa;
+    unsigned long long id{};
+    double pret{};
+    int bagajeCala{};
+    int bagajeMana{};
+    static double pretBagajMana_km;
+    static double pretBagajCala_km;
+    static double pretBilet_km;
     std::vector<Zbor>zboruri;
-    int verifInt(const std::string& s);
-public:
     static unsigned long long id_max;
-    Bilet(double pret_,int bagajeCala_,int bagajeMana_,bool masa_inclusa_,std::vector<Zbor>zboruri_);
+public:
+    Bilet() = default;
+    static int verifInt(const std::string& s);
+    Bilet(double pret_,int bagajeCala_,int bagajeMana_,std::vector<Zbor>zboruri_);
     friend std::ostream& operator<<(std::ostream& os,const Bilet& b);
     void citire(std::istream &in, std::ostream &out,std::unordered_map<std::string,Aeroport>aeroporturi);
-    explicit Bilet(std::istream &in,std::unordered_map<std::string,Aeroport>aeroporturi);
+    Bilet(std::istream &in,std::unordered_map<std::string,Aeroport>aeroporturi);
+
+    unsigned long long int getId() const;
+    static double getPretBagajManaKm();
+
+    static double getPretBagajCalaKm();
+
+    static double getPretBiletKm();
+
+    [[nodiscard]] const std::vector<Zbor> &getZboruri() const;
+
+    void setPret(double pret);
+
+    void setBagajeCala(int bagajeCala);
+
+    void setBagajeMana(int bagajeMana);
+
     ~Bilet();
 };
 

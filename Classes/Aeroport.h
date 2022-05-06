@@ -19,6 +19,10 @@ public:
     void afisare(std::ostream &out) const;
     void addPlecare(Zbor& z);
     void addSosire(Zbor& z);
+
+    [[maybe_unused]] [[nodiscard]] const std::vector<Zbor> &getSosiri() const;
+    [[nodiscard]] const std::vector<Zbor> &getPlecari() const;
+
     [[nodiscard]] const std::string &getAbreviere() const;
     friend std::ostream& operator<<(std::ostream& os,const Aeroport& a);
     explicit Aeroport(std::istream &in);
