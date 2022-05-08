@@ -88,21 +88,16 @@ std::shared_ptr<Persoana> Persoana::create(std::istream &is) {
     std::string functie;
     std::cout<<"Introduceti functia persoanei (Angajat, Client, VIP)\n";
     is>>functie;
-    try{
-        if(functie == "Angajat" || functie == "angajat")
-            p = std::make_shared<Angajat>();
-        else if(functie == "Client" || functie == "client")
-            p = std::make_shared<Client>();
-        else if(functie == "VIP" || functie == "vip")
-            p = std::make_shared<VIP>();
-        else
-            throw eroare_consola{"Tip inexistent"};
+    if(functie == "Angajat" || functie == "angajat")
+        p = std::make_shared<Angajat>();
+    else if(functie == "Client" || functie == "client")
+        p = std::make_shared<Client>();
+    else if(functie == "VIP" || functie == "vip")
+        p = std::make_shared<VIP>();
+    else
+        throw eroare_consola{"Tip inexistent"};
 
-        p->citire(is,std::cout);
-    }
-    catch (eroare_consola& err){
-        throw;
-    }
+    p->citire(is,std::cout);
 
     return p;
 

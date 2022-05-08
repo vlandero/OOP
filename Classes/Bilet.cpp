@@ -110,7 +110,7 @@ void Bilet::citire(std::istream &in, std::ostream &out,std::unordered_map<std::s
     unsigned long long nrz;
 
     in>>nrz;
-    if(nrz <= 0 && nrz > i){
+    if(nrz > i){
         throw eroare_input{"Zbor invalid"};
     }
     if(i == 0){
