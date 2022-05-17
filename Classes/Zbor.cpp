@@ -2,7 +2,7 @@
 
 #include <utility>
 unsigned long long Zbor::id_max = 0;
-Zbor::Zbor(std::string plecare_, std::string destinatie_, int dist, std::tm plecare,std::tm sosire):
+Zbor::Zbor(std::string plecare_, std::string destinatie_, int dist, tm plecare,tm sosire):
     distanta(dist),
     plecare(std::move(plecare_)),
     destinatie(std::move(destinatie_)),
@@ -34,28 +34,23 @@ Zbor::Zbor(std::istream &in) {
 
     int an,luna,zi,ora,min;
     in>>an>>luna>>zi>>ora>>min;
-    std::tm tmp{};
-    tmp.tm_hour = ora;
-    tmp.tm_min = min;
-    tmp.tm_year = an - 1900;
-    tmp.tm_mon = luna - 1;
-    tmp.tm_mday = zi;
+    detalii_plecare.tm_hour = ora;
+    detalii_plecare.tm_min = min;
+    detalii_plecare.tm_year = an - 1900;
+    detalii_plecare.tm_mon = luna - 1;
+    detalii_plecare.tm_mday = zi;
 
     in>>an>>luna>>zi>>ora>>min;
-    std::tm tms{};
-    tms.tm_hour = ora;
-    tms.tm_min = min;
-    tms.tm_year = an - 1900;
-    tms.tm_mon = luna - 1;
-    tms.tm_mday = zi;
+    detalii_sosire.tm_hour = ora;
+    detalii_sosire.tm_min = min;
+    detalii_sosire.tm_year = an - 1900;
+    detalii_sosire.tm_mon = luna - 1;
+    detalii_sosire.tm_mday = zi;
 
-    this->id = id_max;
-    id_max++;
+    this->id = id_max++;
     this->distanta = dist;
     this->plecare = abvplec;
     this->destinatie = abvsos;
-    this->detalii_plecare = tmp;
-    this->detalii_sosire = tms;
 }
 
 const unsigned long long &Zbor::getId() const {
@@ -74,10 +69,10 @@ double Zbor::getDistanta() const {
     return distanta;
 }
 
-const tm &Zbor::getDetaliiPlecare() const {
+tm Zbor::getDetaliiPlecare() const {
     return detalii_plecare;
 }
 
-const tm &Zbor::getDetaliiSosire() const {
+tm Zbor::getDetaliiSosire() const {
     return detalii_sosire;
 }

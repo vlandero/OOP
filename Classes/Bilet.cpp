@@ -58,9 +58,11 @@ void Bilet::citire(std::istream &in, std::ostream &out,std::unordered_map<std::s
         auto aeroport_intermediar = aeroporturi[sosire];
         for(auto &z1 : aeroport_intermediar.getPlecari()){
             if(z1.getDestinatie() == aeroport_sosire.getAbreviere()){
-                Time t1{z.getDetaliiSosire()};
-                Time t2{z1.getDetaliiPlecare()};
-                double dif = Time::getDifInDays(t1,t2);
+                auto temp1 = z.getDetaliiPlecare();
+                auto temp2 = z.getDetaliiSosire();
+                time_t t1 = mktime(&temp1);
+                time_t t2 = mktime(&temp2);
+                double dif = difftime(t2,t1)/(60*60*24);
                 if(dif > 0 && dif < 1)
                     zb2.emplace_back(z,z1);
             }

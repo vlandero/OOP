@@ -19,7 +19,7 @@ private:
     int bagajeCala_incluse{};
     int bagajeMana_incluse{};
 public:
-    void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out);
+    void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) override;
     void afisare(std::ostream &os) const override;
     void citire(std::istream &is,std::ostream &os) override;
     VIP() = default;
