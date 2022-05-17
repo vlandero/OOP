@@ -4,12 +4,18 @@
 
 #include "Factura.h"
 
-Factura::Factura(const std::shared_ptr<Persoana>& p, const Bilet &bt) {
+Factura::Factura(const std::shared_ptr<Persoana>& p, const Bilet &bt):
+pers(p->clone()),
+bilet(bt)
+{
     bilet = bt;
     pers = p->clone();
 }
 
-Factura::Factura(const Factura &other) {
+Factura::Factura(const Factura &other):
+pers(other.pers->clone()),
+bilet(other.bilet)
+{
     bilet = other.bilet;
     pers = other.pers->clone();
 }
