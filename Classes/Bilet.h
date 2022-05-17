@@ -3,7 +3,7 @@
 #include <vector>
 #include "Zbor.h"
 #include "Aeroport.h"
-#include "Erori.cpp"
+#include "Utility.h"
 #include <unordered_map>
 
 class Bilet {
@@ -18,7 +18,6 @@ class Bilet {
     static unsigned long long id_max;
 public:
     Bilet() = default;
-    static int verifInt(const std::string& s);
     Bilet(double pret_,int bagajeCala_,int bagajeMana_,std::vector<Zbor>zboruri_);
     friend std::ostream& operator<<(std::ostream& os,const Bilet& b);
     void citire(std::istream &in, std::ostream &out,std::unordered_map<std::string,Aeroport>aeroporturi);

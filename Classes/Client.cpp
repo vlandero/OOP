@@ -4,7 +4,6 @@
 
 #include "Client.h"
 
-#include <utility>
 
 void Client::afisare(std::ostream &os) const {
     os<<"Client\n";
@@ -17,8 +16,8 @@ std::ostream &operator<<(std::ostream &os, const Client &p) {
 }
 
 Client::Client(const std::string &nume, const std::string &prenume, int varsta, const std::string &cnp,
-                 const std::vector<Bilet> &b,std::string tip_) : Persoana(nume, prenume, varsta, cnp,
-                                                                                         b,std::move(tip_)){
+                 const std::vector<Bilet> &b) : Persoana(nume, prenume, varsta, cnp,
+                                                                                         b){
 //    std::cout<<"Constructor Client\n";
 }
 
@@ -28,29 +27,10 @@ std::shared_ptr<Persoana> Client::clone() const {
 
 void Client::citire(std::istream &is, std::ostream &os) {
     Persoana::citire(is, os);
-    tip = "Client";
 }
 
 void Client::calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) {
-    double pret = 0;
-    double pretBagajCala = 0,pretBagajMana = 0;
-    for(auto &z : b.getZboruri()){
-        pretBagajCala += z.getDistanta() * Bilet::getPretBagajCalaKm();
-        pretBagajMana += z.getDistanta() * Bilet::getPretBagajManaKm();
-        pret += z.getDistanta() * Bilet::getPretBiletKm();
-    }
-    out<<"Pretul zborului este de "<<pret<<"\n";
-    int bb;
-    out<<"Introduceti numarul de bagaje de cala dorit ("<<pretBagajCala<<" per bagaj)\n";
-    in>>bb;
-    b.setBagajeCala(bb);
-    pret += bb * pretBagajCala;
-    out<<"Introduceti numarul de bagaje de mana dorit ("<<pretBagajMana<<" per bagaj)\n";
-    in>>bb;
-    b.setBagajeMana(bb);
-    pret += bb * pretBagajMana;
-    out<<"Totalul de plata: "<<pret<<"\n";
-    b.setPret(pret);
+    Persoana::provCalculeazaPret(b,0,0,0,in,out);
 }
 
 Client::~Client() = default;

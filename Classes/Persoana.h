@@ -13,18 +13,15 @@ protected:
     int varsta{};
     std::string CNP;
     std::vector<Bilet>bilete;
-    static int verifInt(const std::string& s);
-    static void verifCNP(std::string cnp);
-    static bool validDate(int year, int month, int day);
     Persoana() = default;
+    static void provCalculeazaPret(Bilet &b,int discount_zboruri,int bagajeCala_incluse,int bagajeMana_incluse, std::istream &in, std::ostream &out);
     static unsigned long long id_max;
-    std::string tip;
+
 public:
 
     virtual void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) = 0;
-    [[nodiscard]] const std::string &getTip() const;
 
-    Persoana(std::string nume_,std::string prenume_,int varsta, std::string CNP_,std::vector<Bilet>b,std::string tip_);
+    Persoana(std::string nume_,std::string prenume_,int varsta, std::string CNP_,std::vector<Bilet>b);
     Persoana(const Persoana &other);
 
     virtual void citire(std::istream &is,std::ostream &out);
@@ -34,6 +31,10 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os,const Persoana& p);
     Persoana& operator=(const Persoana& other);
+
+    [[nodiscard]] const std::string &getNume() const;
+
+    [[nodiscard]] const std::string &getPrenume() const;
 
     virtual ~Persoana();
 

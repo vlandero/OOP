@@ -8,13 +8,12 @@
 #include "VIP.h"
 #include <utility>
 unsigned long long Persoana::id_max = 0;
-Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b,std::string tip_):
+Persoana::Persoana(std::string nume_, std::string prenume_, int varsta_, std::string CNP_,std::vector<Bilet>b):
 nume(std::move(nume_)),
 prenume(std::move(prenume_)),
 varsta(varsta_),
 CNP(std::move(CNP_)),
-bilete(std::move(b)),
-tip(std::move(tip_)){
+bilete(std::move(b)){
     id = id_max;
     id_max++;
 }
@@ -35,7 +34,6 @@ Persoana &Persoana::operator=(const Persoana &other) {
     this->CNP = other.CNP;
     this->bilete = other.bilete;
     this->id = other.id;
-    this->tip = other.tip;
     return *this;
 }
 
@@ -45,8 +43,7 @@ Persoana::Persoana(const Persoana &other):
     prenume(other.prenume),
     varsta(other.varsta),
     CNP(other.CNP),
-    bilete(other.bilete),
-    tip(other.tip)
+    bilete(other.bilete)
     {
     //std::cout<<"Constructor de copiere apelat\n";
 }
@@ -70,11 +67,11 @@ void Persoana::citire(std::istream &is,std::ostream &os) {
     is>>Prenume;
     os<<"Introduceti CNP\n";
     is>>cnp;
-    verifCNP(cnp);
+    Utility::verifCNP(cnp);
 
     os<<"Introduceti varsta\n";
     is>>V;
-    v = verifInt(V);
+    v = Utility::verifInt(V);
     nume = Nume;
     prenume = Prenume;
     CNP = cnp;
@@ -107,66 +104,39 @@ void Persoana::addBilet(Bilet &b) {
     this->bilete.push_back(b);
 }
 
-int Persoana::verifInt(const std::string& s) {
-    int num = 0;
-    for(auto &n : s){
-        if(!std::isdigit(n)){
-            throw eroare_consola{"Introduceti numar"};
-        }
-        num = num * 10 + int(n - '0');
-    }
-    return num;
-}
-
-void Persoana::verifCNP(std::string cnp) {
-    if(cnp.size() != 13)
-        throw eroare_consola{"CNP invalid"};
-    for(auto &n : cnp){
-        if(!std::isdigit(n)){
-            throw eroare_consola{"CNP invalid"};
-        }
-    }
-    std::string p;
-    int day,month,year;
-    p.push_back(cnp[1]);
-    p.push_back(cnp[2]);
-    year = std::stoi(p);
-    p.clear();
-    p.push_back(cnp[3]);
-    p.push_back(cnp[4]);
-    month = std::stoi(p);
-    p.clear();
-    p.push_back(cnp[5]);
-    p.push_back(cnp[6]);
-    day = std::stoi(p);
-    p.clear();
-
-    if(!validDate(year,month,day))
-        throw eroare_consola{"CNP invalid"};
-}
-
-bool Persoana::validDate(int year, int month, int day) {
-    if (month < 1 || month > 12)
-        return false;
-    if (day < 1 || day > 31)
-        return false;
-    if (month == 2)
-    {
-        if ((year % 4 == 0) && (year % 100 != 0))
-            return (day <= 29);
-        else
-            return (day <= 28);
-    }
-    if (month == 4 || month == 6 ||
-        month == 9 || month == 11)
-        return (day <= 30);
-    return true;
-}
 
 unsigned long long int Persoana::getId() const {
     return id;
 }
 
-const std::string &Persoana::getTip() const {
-    return tip;
+const std::string &Persoana::getNume() const {
+    return nume;
 }
+
+const std::string &Persoana::getPrenume() const {
+    return prenume;
+}
+
+void Persoana::provCalculeazaPret(Bilet &b,int discount_zboruri,int bagajeCala_incluse,int bagajeMana_incluse, std::istream &in, std::ostream &out) {
+    double pret = 0;
+    double pretBagajCala = 0,pretBagajMana = 0;
+    for(auto &z : b.getZboruri()){
+        pretBagajCala += z.getDistanta() * Bilet::getPretBagajCalaKm();
+        pretBagajMana += z.getDistanta() * Bilet::getPretBagajManaKm();
+        pret += z.getDistanta() * Bilet::getPretBiletKm();
+    }
+    out<<"Pretul zborului este de "<<pret<<", la care se aplica o reducere de "<<discount_zboruri<<"%\n";
+    pret *= (double(100 - discount_zboruri) / 100);
+    int bb;
+    out<<"Introduceti numarul de bagaje de cala dorit ("<<pretBagajCala<<" per bagaj, momentan aveti "<<bagajeCala_incluse<<" incluse)\n";
+    in>>bb;
+    b.setBagajeCala(bb + bagajeCala_incluse);
+    pret += bb * pretBagajCala;
+    out<<"Introduceti numarul de bagaje de mana dorit ("<<pretBagajMana<<" per bagaj, momentan aveti "<<bagajeCala_incluse<<" incluse)\n";
+    in>>bb;
+    b.setBagajeMana(bb + bagajeMana_incluse);
+    pret += bb * pretBagajMana;
+    out<<"Totalul de plata: "<<pret<<"\n";
+    b.setPret(pret);
+}
+

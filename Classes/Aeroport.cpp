@@ -16,33 +16,30 @@ Aeroport::Aeroport(std::istream &in) {
 
 }
 
-void Aeroport::afisare(std::ostream &out) const {
-    out<<this->nume<<" ("<<this->abreviere<<"), "<<this->locatie<<'\n';
-    out<<"Plecari:\n";
-    for(auto &plecare : plecari){
-        out<<plecare;
-    }
-    out<<"Sosiri:\n";
-    for(auto &sosire : sosiri){
-        out<<sosire;
-    }
-    out<<'\n';
-}
 
 const std::string &Aeroport::getAbreviere() const {
     return abreviere;
 }
 
-void Aeroport::addSosire(Zbor& z) {
+void Aeroport::addSosire(const Zbor& z) {
     this->sosiri.push_back(z);
 }
 
-void Aeroport::addPlecare(Zbor& z) {
+void Aeroport::addPlecare(const Zbor& z) {
     this->plecari.push_back(z);
 }
 
 std::ostream &operator<<(std::ostream &os, const Aeroport &a) {
-    a.afisare(os);
+    os<<a.nume<<" ("<<a.abreviere<<"), "<<a.locatie<<'\n';
+    os<<"Plecari:\n";
+    for(auto &plecare : a.plecari){
+        os<<plecare;
+    }
+    os<<"Sosiri:\n";
+    for(auto &sosire : a.sosiri){
+        os<<sosire;
+    }
+    os<<'\n';
     return os;
 }
 

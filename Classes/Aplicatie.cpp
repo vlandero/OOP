@@ -110,13 +110,12 @@ void Aplicatie::addBilet() {
         int ID;
         std::string idd;
         std::cin>>idd;
-        ID = Bilet::verifInt(idd);
+        ID = Utility::verifInt(idd);
         if(persoane.find(ID) == persoane.end()){
             std::cout<<"Persoana inexistenta\n";
             return;
         }
         auto p = persoane[ID];
-        std::cout<<p->getTip()<<'\n';
         auto b = Bilet();
         b.citire(std::cin,std::cout,aeroporturi);
         if(b.getZboruri().empty()){
@@ -126,6 +125,9 @@ void Aplicatie::addBilet() {
         p->calculeazaPret(b,std::cin,std::cout);
         p->addBilet(b);
         bilete[b.getId()] = b;
+        Factura f{p,b};
+        facturi[b.getId()] = f; //fiecare factura corespunde unui bilet, astfel fac conexiunea prin id
+        std::cout<<f;
 
     }
     catch (eroare_consola& err){

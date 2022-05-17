@@ -15,7 +15,7 @@ public:
     Client() = default;
     friend std::ostream& operator<<(std::ostream& os,const Client& p);
     Client(const std::string &nume, const std::string &prenume, int varsta, const std::string &cnp,
-            const std::vector<Bilet> &b,std::string tip_);
+            const std::vector<Bilet> &b);
     [[maybe_unused]] [[nodiscard]] std::shared_ptr<Persoana> clone() const override;
     ~Client() override;
 };

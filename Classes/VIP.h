@@ -19,13 +19,13 @@ private:
     int bagajeCala_incluse{};
     int bagajeMana_incluse{};
 public:
-    void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) override;
+    void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out);
     void afisare(std::ostream &os) const override;
     void citire(std::istream &is,std::ostream &os) override;
     VIP() = default;
     friend std::ostream& operator<<(std::ostream& os,const VIP& p);
     VIP(const std::string &nume, const std::string &prenume, int varsta, const std::string &cnp,
-           const std::vector<Bilet> &b,int nivel, int buget_m,int d_duty_free,int d_zboruri,std::string tip_);
+           const std::vector<Bilet> &b,int nivel, int buget_m,int d_duty_free,int d_zboruri);
     [[maybe_unused]] [[nodiscard]] std::shared_ptr<Persoana> clone() const override;
     ~VIP() override;
 };

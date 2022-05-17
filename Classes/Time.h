@@ -19,7 +19,7 @@ public:
     [[maybe_unused]] Time(int day_, int month_, int year_,int hr,int min);
     Time() = default;
     explicit Time(tm t);
-    static int getDifInMinutes(const Time& t1, const Time& t2); //numar minutele de pe 1 ian 2020
+    static double getDifInDays(const Time& t1, const Time& t2); //numar minutele de pe 1 ian 2020
 
 };
 

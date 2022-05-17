@@ -18,7 +18,7 @@ public:
     Angajat() = default;
     friend std::ostream& operator<<(std::ostream& os,const Angajat& p);
     Angajat(const std::string &nume, const std::string &prenume, int varsta, const std::string &cnp,
-            const std::vector<Bilet> &b, int salariu,std::string post_,std::string aeroport,std::string tip_);
+            const std::vector<Bilet> &b, int salariu,std::string post_,std::string aeroport);
     [[maybe_unused]] [[nodiscard]] std::shared_ptr<Persoana> clone() const override;
     ~Angajat() override;
 };

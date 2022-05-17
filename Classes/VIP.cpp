@@ -22,8 +22,8 @@ std::ostream &operator<<(std::ostream &os, const VIP &p) {
 }
 
 VIP::VIP(const std::string &nume, const std::string &prenume, int varsta, const std::string &cnp,
-               const std::vector<Bilet> &b,int nivel, int buget_m,int d_duty_free,int d_zboruri,std::string tip_) : Persoana(nume, prenume, varsta, cnp,
-                                                       b,std::move(tip_)),nivel_VIP(nivel),buget_mancare(buget_m),discount_duty_free(d_duty_free),discount_zboruri(d_zboruri){
+               const std::vector<Bilet> &b,int nivel, int buget_m,int d_duty_free,int d_zboruri) : Persoana(nume, prenume, varsta, cnp,
+                                                       b),nivel_VIP(nivel),buget_mancare(buget_m),discount_duty_free(d_duty_free),discount_zboruri(d_zboruri){
 //    std::cout<<"Constructor VIP\n";
 }
 
@@ -33,7 +33,6 @@ std::shared_ptr<Persoana> VIP::clone() const {
 
 void VIP::citire(std::istream &is, std::ostream &os) {
     Persoana::citire(is, os);
-    tip = "VIP";
     std::string niv;
     os<<"Introduceti nivelul VIP (1/2/3/4)";
     is>>niv;
@@ -56,7 +55,7 @@ void VIP::citire(std::istream &is, std::ostream &os) {
         pretVIP = 150;
     }
     else if(niv == "3"){
-        nivel_VIP = 2;
+        nivel_VIP = 3;
         buget_mancare = 50;
         discount_duty_free = 12;
         discount_zboruri = 12;
@@ -65,7 +64,7 @@ void VIP::citire(std::istream &is, std::ostream &os) {
         pretVIP = 210;
     }
     else if(niv == "4"){
-        nivel_VIP = 1;
+        nivel_VIP = 4;
         buget_mancare = 60;
         discount_duty_free = 18;
         discount_zboruri = 18;
@@ -80,26 +79,7 @@ void VIP::citire(std::istream &is, std::ostream &os) {
 }
 
 void VIP::calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) {
-    double pret = 0;
-    double pretBagajCala = 0,pretBagajMana = 0;
-    for(auto &z : b.getZboruri()){
-        pretBagajCala += z.getDistanta() * Bilet::getPretBagajCalaKm();
-        pretBagajMana += z.getDistanta() * Bilet::getPretBagajManaKm();
-        pret += z.getDistanta() * Bilet::getPretBiletKm();
-    }
-    out<<"Pretul zborului este de "<<pret<<", la care se aplica o reducere de "<<discount_zboruri<<"%\n";
-    pret *= (double(100 - discount_zboruri) / 100);
-    int bb;
-    out<<"Introduceti numarul de bagaje de cala dorit ("<<pretBagajCala<<" per bagaj, momentan aveti "<<bagajeCala_incluse<<" incluse)\n";
-    in>>bb;
-    b.setBagajeCala(bb + bagajeCala_incluse);
-    pret += bb * pretBagajCala;
-    out<<"Introduceti numarul de bagaje de mana dorit ("<<pretBagajMana<<" per bagaj, momentan aveti "<<bagajeCala_incluse<<" incluse)\n";
-    in>>bb;
-    b.setBagajeMana(bb + bagajeMana_incluse);
-    pret += bb * pretBagajMana;
-    out<<"Totalul de plata: "<<pret<<"\n";
-    b.setPret(pret);
+    Persoana::provCalculeazaPret(b,discount_zboruri,bagajeCala_incluse,bagajeMana_incluse,in,out);
 }
 
 VIP::~VIP() = default;

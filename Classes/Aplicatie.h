@@ -9,9 +9,7 @@
 #include <vector>
 #include <fstream>
 #include "Zbor.h"
-#include "Angajat.h"
-#include "VIP.h"
-#include "Client.h"
+#include "Factura.h"
 #include <typeinfo>
 
 class Aplicatie {
@@ -21,6 +19,7 @@ class Aplicatie {
     std::unordered_map<std::string,Aeroport>aeroporturi;
     std::unordered_map<unsigned long long,Bilet>bilete;
     std::unordered_map<unsigned long long,Zbor>zboruri;
+    std::unordered_map<unsigned long long,Factura>facturi;
     Aplicatie() = default;
 
     void checkAeroporturi();

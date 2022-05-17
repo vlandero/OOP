@@ -16,9 +16,8 @@ class Aeroport {
     std::vector<Zbor> plecari;
     std::vector<Zbor> sosiri;
 public:
-    void afisare(std::ostream &out) const;
-    void addPlecare(Zbor& z);
-    void addSosire(Zbor& z);
+    void addPlecare(const Zbor& z);
+    void addSosire(const Zbor& z);
 
     [[nodiscard]] const std::vector<Zbor> &getPlecari() const;
 

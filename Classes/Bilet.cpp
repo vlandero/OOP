@@ -21,23 +21,13 @@ std::ostream &operator<<(std::ostream &os, const Bilet& b) {
     os<<"Bagaje de cala incluse: "<<b.bagajeCala<<'\n';
     os<<"Bagaje de mana incluse: "<<b.bagajeMana<<'\n';
     for(const auto & zbor : b.zboruri)
-        os<<zbor<<'\n';
+        os<<zbor;
     return os;
 }
 Bilet::~Bilet() {
     //std::cout<<"Destructor Bilet apelat\n";
 }
 
-int Bilet::verifInt(const std::string& s) {
-    int num = 0;
-    for(auto &n : s){
-        if(!std::isdigit(n)){
-            throw eroare_consola{"Introduceti numar"};
-        }
-        num = num * 10 + int(n - '0');
-    }
-    return num;
-}
 
 void Bilet::citire(std::istream &in, std::ostream &out,std::unordered_map<std::string,Aeroport>aeroporturi) {
     std::string plecareID,destinatieID;
@@ -70,8 +60,8 @@ void Bilet::citire(std::istream &in, std::ostream &out,std::unordered_map<std::s
             if(z1.getDestinatie() == aeroport_sosire.getAbreviere()){
                 Time t1{z.getDetaliiSosire()};
                 Time t2{z1.getDetaliiPlecare()};
-                int dif = Time::getDifInMinutes(t1,t2);
-                if(dif > 30 && dif < 1440)
+                double dif = Time::getDifInDays(t1,t2);
+                if(dif > 0 && dif < 1)
                     zb2.emplace_back(z,z1);
             }
         }

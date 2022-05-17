@@ -3,6 +3,7 @@
 //
 
 #include "Time.h"
+#include <iostream>
 std::vector<int> Time::monthDays{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 [[maybe_unused]] Time::Time(int day_, int month_, int year_, int hr, int min):
@@ -15,21 +16,13 @@ minute(min)
 
 }
 
-int Time::getDifInMinutes(const Time& t1, const Time& t2) {
-
-    int days1 = 366,days2 = 366; // zile de la 1 ianuarie 2020 incoace
-    days1 += t1.day + (t1.year - 2021) * 365;
-    days2 += t2.day + (t2.year - 2021) * 365;
-    for(int i = 1; i < t1.month; ++i){
-        days1 += monthDays[i];
-    }
-    for(int i = 1; i < t2.month; ++i){
-        days2 += monthDays[i];
-    }
-    int minutes1 = days1 * 1440 + t1.hour * 60 + t1.minute;
-    int minutes2 = days2 * 1440 + t2.hour * 60 + t2.minute;
-
-    return minutes2 - minutes1;
+double Time::getDifInDays(const Time& t1, const Time& t2) {
+    struct std::tm a{0,t1.minute,t1.hour,t1.day,t1.month,t1.year,0,0,0};
+    struct std::tm b{0,t2.minute,t2.hour,t2.day,t2.month,t2.year,0,0,0};
+    std::time_t at = std::mktime(&a);
+    std::time_t bt = std::mktime(&b);
+    double diff = std::difftime(bt,at) / (60*60*24);
+    return diff;
 }
 
 Time::Time(tm t) {
