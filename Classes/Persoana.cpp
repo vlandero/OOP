@@ -127,7 +127,7 @@ void Persoana::provCalculeazaPret(Bilet &b,int discount_zboruri,int bagajeCala_i
     }
     out<<"Pretul zborului este de "<<pret<<", la care se aplica o reducere de "<<discount_zboruri<<"%\n";
     pret *= (double(100 - discount_zboruri) / 100);
-    int bb;
+    int bb = 0;
     out<<"Introduceti numarul de bagaje de cala dorit ("<<pretBagajCala<<" per bagaj, momentan aveti "<<bagajeCala_incluse<<" incluse)\n";
     in>>bb;
     b.setBagajeCala(bb + bagajeCala_incluse);
