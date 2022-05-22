@@ -5,7 +5,7 @@
 #include "Angajat.h"
 
 #include <utility>
-int Angajat::reducere = 5;
+double Angajat::reducere = 5;
 void Angajat::afisare(std::ostream &os) const {
     os<<"Angajat\n";
     os<<"Post: "<<this->post<<'\n';
@@ -47,7 +47,16 @@ void Angajat::citire(std::istream &is, std::ostream &os) {
 }
 
 void Angajat::calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) {
-    Persoana::provCalculeazaPret(b,reducere,0,0,in,out);
+    aplicareReducere(b,out);
+    out<<"Aveti "<<reducere<<"% reducere la zbor\n";
+    Persoana::calculeazaPret(b,in,out);
+}
+
+void Angajat::aplicareReducere(Bilet &b, std::ostream &out) {
+    Persoana::aplicareReducere(b, out);
+    double pret = b.getPret();
+    pret = pret * (reducere / 100);
+    b.setPret(pret);
 }
 
 Angajat::~Angajat() = default;

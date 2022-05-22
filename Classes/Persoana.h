@@ -14,12 +14,12 @@ protected:
     std::string CNP;
     std::vector<Bilet>bilete;
     Persoana() = default;
-    static void provCalculeazaPret(Bilet &b,int discount_zboruri,int bagajeCala_incluse,int bagajeMana_incluse, std::istream &in, std::ostream &out);
     static unsigned long long id_max;
 
 public:
 
-    virtual void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) = 0;
+    virtual void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out);
+    virtual void aplicareReducere(Bilet &b, std::ostream &out);
 
     Persoana(std::string nume_,std::string prenume_,int varsta, std::string CNP_,std::vector<Bilet>b);
     Persoana(const Persoana &other);

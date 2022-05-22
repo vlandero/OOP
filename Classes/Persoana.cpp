@@ -117,26 +117,31 @@ const std::string &Persoana::getPrenume() const {
     return prenume;
 }
 
-void Persoana::provCalculeazaPret(Bilet &b,int discount_zboruri,int bagajeCala_incluse,int bagajeMana_incluse, std::istream &in, std::ostream &out) {
-    double pret = 0;
+
+void Persoana::calculeazaPret(Bilet &b, std::istream &in, std::ostream &out) {
+    double pret = b.getPret();
     double pretBagajCala = 0,pretBagajMana = 0;
     for(auto &z : b.getZboruri()){
         pretBagajCala += z.getDistanta() * Bilet::getPretBagajCalaKm();
         pretBagajMana += z.getDistanta() * Bilet::getPretBagajManaKm();
+    }
+    int b1=0,b2=0;
+    out<<"Introduceti numarul de bagaje de cala dorit ("<<pretBagajCala<<" per bagaj, pe langa cele incluse daca exista)\n";
+    in>>b1;
+    out<<"Introduceti numarul de bagaje de mana dorit ("<<pretBagajMana<<" per bagaj, pe langa cele incluse daca exista)\n";
+    in>>b2;
+    b.setBagajeMana(b2);
+    b.setBagajeCala(b1);
+    pret += b1 * pretBagajCala + b2 * pretBagajMana;
+    b.setPret(pret);
+}
+
+void Persoana::aplicareReducere(Bilet &b, std::ostream &out) {
+    double pret = 0;
+    for(auto &z : b.getZboruri()){
         pret += z.getDistanta() * Bilet::getPretBiletKm();
     }
-    out<<"Pretul zborului este de "<<pret<<", la care se aplica o reducere de "<<discount_zboruri<<"%\n";
-    pret *= (double(100 - discount_zboruri) / 100);
-    int bb = 0;
-    out<<"Introduceti numarul de bagaje de cala dorit ("<<pretBagajCala<<" per bagaj, momentan aveti "<<bagajeCala_incluse<<" incluse)\n";
-    in>>bb;
-    b.setBagajeCala(bb + bagajeCala_incluse);
-    pret += bb * pretBagajCala;
-    out<<"Introduceti numarul de bagaje de mana dorit ("<<pretBagajMana<<" per bagaj, momentan aveti "<<bagajeCala_incluse<<" incluse)\n";
-    in>>bb;
-    b.setBagajeMana(bb + bagajeMana_incluse);
-    pret += bb * pretBagajMana;
-    out<<"Totalul de plata: "<<pret<<"\n";
+    out<<"Pretul zborului este de "<<pret<<", la care se adauga alte reduceri suplimentare daca este cazul.\n";
     b.setPret(pret);
 }
 

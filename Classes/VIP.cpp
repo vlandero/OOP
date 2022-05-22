@@ -22,7 +22,7 @@ std::ostream &operator<<(std::ostream &os, const VIP &p) {
 }
 
 VIP::VIP(const std::string &nume, const std::string &prenume, int varsta, const std::string &cnp,
-               const std::vector<Bilet> &b,int nivel, int buget_m,int d_duty_free,int d_zboruri) : Persoana(nume, prenume, varsta, cnp,
+               const std::vector<Bilet> &b,int nivel, int buget_m,int d_duty_free,double d_zboruri) : Persoana(nume, prenume, varsta, cnp,
                                                        b),nivel_VIP(nivel),buget_mancare(buget_m),discount_duty_free(d_duty_free),discount_zboruri(d_zboruri){
 //    std::cout<<"Constructor VIP\n";
 }
@@ -79,7 +79,21 @@ void VIP::citire(std::istream &is, std::ostream &os) {
 }
 
 void VIP::calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) {
-    Persoana::provCalculeazaPret(b,discount_zboruri,bagajeCala_incluse,bagajeMana_incluse,in,out);
+    aplicareReducere(b,out);
+    out<<"Aveti "<<discount_zboruri<<"% reducere la zbor";
+    if(bagajeMana_incluse)
+        out<<", "<<bagajeMana_incluse<<" bagaj de mana incluse";
+    if(bagajeCala_incluse)
+        out<<", "<<bagajeMana_incluse<<" bagaj de cala incluse";
+    out<<'\n';
+    Persoana::calculeazaPret(b,in,out);
+}
+
+void VIP::aplicareReducere(Bilet &b, std::ostream &out) {
+    Persoana::aplicareReducere(b, out);
+    double pret = b.getPret();
+    pret = pret * (double(discount_zboruri) / 100);
+    b.setPret(pret);
 }
 
 VIP::~VIP() = default;

@@ -38,6 +38,12 @@ public:
 
     void setBagajeMana(int bagajeMana);
 
+    [[nodiscard]] double getPret() const;
+
+    int getBagajeCala() const;
+
+    int getBagajeMana() const;
+
     ~Bilet();
 };
 

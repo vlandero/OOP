@@ -10,6 +10,7 @@
 class Client : public Persoana {
 public:
     void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) override;
+    void aplicareReducere(Bilet &b, std::ostream &out) override;
     void afisare(std::ostream &os) const override;
     void citire(std::istream &is,std::ostream &os) override;
     Client() = default;

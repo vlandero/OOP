@@ -8,11 +8,12 @@
 
 class Angajat : public Persoana {
     int salariu{};
-    static int reducere;
+    static double reducere;
     std::string post;
     std::string aeroport;
 public:
     void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) override;
+    void aplicareReducere(Bilet &b, std::ostream &out) override;
     void afisare(std::ostream &os) const override;
     void citire(std::istream &is,std::ostream &os) override;
     Angajat() = default;
