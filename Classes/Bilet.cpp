@@ -184,14 +184,6 @@ double Bilet::getPret() const {
     return pret;
 }
 
-int Bilet::getBagajeCala() const {
-    return bagajeCala;
-}
-
-int Bilet::getBagajeMana() const {
-    return bagajeMana;
-}
-
 
 
 
