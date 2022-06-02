@@ -19,7 +19,9 @@ class Rezervare {
     int nr_persoane{};
     int reducere = 0;
     int buget = 0;
+
     friend class builder_rezervare;
+
 public:
     [[nodiscard]] unsigned long long int getId() const;
 
@@ -28,41 +30,46 @@ public:
     Rezervare() = default;
 };
 
-class builder_rezervare{
+class builder_rezervare {
     Rezervare r;
 public:
     builder_rezervare() = default;
-    builder_rezervare& restaurant(std::string& rs) {
+
+    builder_rezervare &restaurant(std::string &rs) {
         r.restaurant = std::move(rs);
         return *this;
     }
-    builder_rezervare& aeroport(std::string& a) {
+
+    builder_rezervare &aeroport(std::string &a) {
         r.aeroport = std::move(a);
         return *this;
     }
-    builder_rezervare& nr_persoane(int n) {
+
+    builder_rezervare &nr_persoane(int n) {
         r.nr_persoane = n;
         return *this;
     }
-    builder_rezervare& reducere(int n) {
+
+    builder_rezervare &reducere(int n) {
         r.reducere = n;
         return *this;
     }
-    builder_rezervare& buget(int n) {
+
+    builder_rezervare &buget(int n) {
         r.buget = n;
         return *this;
     }
-    builder_rezervare& pers(std::string n) {
+
+    builder_rezervare &pers(std::string n) {
         r.nume_pers = std::move(n);
         return *this;
     }
-    Rezervare build(){
+
+    Rezervare build() {
         r.id = Rezervare::id_max++;
         return r;
     }
 };
-
-
 
 
 #endif //OOP_REZERVARE_H

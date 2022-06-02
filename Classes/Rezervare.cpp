@@ -11,13 +11,15 @@ unsigned long long int Rezervare::getId() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Rezervare &rezervare) {
-    os << "Numele persoanei pe care s-a facut rezervarea: " << rezervare.nume_pers << "\nRestaurant: " << rezervare.restaurant << "\nAeroport: "
-       << rezervare.aeroport << "\nNumarul de persoane: " << rezervare.nr_persoane << "\nID-ul rezervarii este:"<<rezervare.id<<'\n';
-    if(rezervare.reducere){
-        std::cout<<"Reducere "<<rezervare.reducere<<"%\n";
+    os << "Numele persoanei pe care s-a facut rezervarea: " << rezervare.nume_pers << "\nRestaurant: "
+       << rezervare.restaurant << "\nAeroport: "
+       << rezervare.aeroport << "\nNumarul de persoane: " << rezervare.nr_persoane << "\nID-ul rezervarii este:"
+       << rezervare.id << '\n';
+    if (rezervare.reducere) {
+        std::cout << "Reducere " << rezervare.reducere << "%\n";
     }
-    if(rezervare.buget){
-        std::cout<<"Buget "<<rezervare.buget<<" euro\n";
+    if (rezervare.buget) {
+        std::cout << "Buget " << rezervare.buget << " euro\n";
     }
     return os;
 }

@@ -16,14 +16,18 @@ class Aeroport {
     std::vector<Zbor> plecari;
     std::vector<Zbor> sosiri;
 public:
-    void addPlecare(const Zbor& z);
-    void addSosire(const Zbor& z);
+    void addPlecare(const Zbor &z);
+
+    void addSosire(const Zbor &z);
 
     [[nodiscard]] const std::vector<Zbor> &getPlecari() const;
 
     [[nodiscard]] const std::string &getAbreviere() const;
-    friend std::ostream& operator<<(std::ostream& os,const Aeroport& a);
+
+    friend std::ostream &operator<<(std::ostream &os, const Aeroport &a);
+
     explicit Aeroport(std::istream &in);
+
     Aeroport() = default;
 };
 

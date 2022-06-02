@@ -4,6 +4,7 @@
 
 #ifndef OOP_APLICATIE_H
 #define OOP_APLICATIE_H
+
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -15,27 +16,37 @@
 class Aplicatie {
     std::ifstream fin_zbor{"files/zboruri.txt"};
     std::ifstream fin_aeroport{"files/aeroporturi.txt"};
-    std::unordered_map<unsigned long long,std::shared_ptr<Persoana>>persoane;
-    std::unordered_map<std::string,Aeroport>aeroporturi;
-    std::unordered_map<unsigned long long,Bilet>bilete;
-    std::unordered_map<unsigned long long,Zbor>zboruri;
-    std::unordered_map<unsigned long long,Rezervare>rezervari;
+    std::unordered_map<unsigned long long, std::shared_ptr<Persoana>> persoane;
+    std::unordered_map<std::string, Aeroport> aeroporturi;
+    std::unordered_map<unsigned long long, Bilet> bilete;
+    std::unordered_map<unsigned long long, Zbor> zboruri;
+    std::unordered_map<unsigned long long, Rezervare> rezervari;
+
     Aplicatie() = default;
 
     void checkAeroporturi();
+
     void checkZboruri();
+
     void checkPersoane();
+
     void addPersoana();
+
     void addBilet();
+
     void rezerva();
 
 public:
-    Aplicatie(const Aplicatie&) = delete;
-    Aplicatie& operator=(const Aplicatie&) = delete;
-    static Aplicatie& createApp();
+    Aplicatie(const Aplicatie &) = delete;
+
+    Aplicatie &operator=(const Aplicatie &) = delete;
+
+    static Aplicatie &createApp();
+
     ~Aplicatie();
 
     void citire_fisiere();
+
     void run();
 };
 
