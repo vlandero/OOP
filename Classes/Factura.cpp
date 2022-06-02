@@ -5,9 +5,10 @@
 #include "Factura.h"
 
 template<typename T>
-Factura<T>::Factura(const std::shared_ptr<Persoana>& p, const Bilet &bt):
+Factura<T>::Factura(const std::shared_ptr<Persoana>& p, const Bilet &bt,const T tva):
 pers(p->clone()),
-bilet(bt)
+bilet(bt),
+TVA(tva)
 {
 
 }
@@ -15,7 +16,8 @@ bilet(bt)
 template<typename T>
 Factura<T>::Factura(const Factura<T> &other):
 pers(other.pers->clone()),
-bilet(other.bilet)
+bilet(other.bilet),
+TVA(other.TVA)
 {
 
 }
@@ -39,8 +41,7 @@ void swap(Factura<T> &f1, Factura<T> &f2) {
     swap(f1.bilet,f2.bilet);
 }
 
-template<typename T>
-void Factura<T>::setTva(T tva) {
-    TVA = tva;
-}
+template class Factura<int>;
 
+template
+std::ostream& operator<< <>(std::ostream& o, const Factura<int>& x);

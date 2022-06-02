@@ -126,8 +126,7 @@ void Aplicatie::addBilet() {
         p->calculeazaPret(b,std::cin,std::cout);
         p->addBilet(b);
         bilete[b.getId()] = b;
-        Factura<int> f{p,b};
-        f.setTva(19);
+        Factura<int> f{p,b,19};
         facturi[b.getId()] = f; //fiecare factura corespunde unui bilet, astfel fac conexiunea prin id
         std::cout<<f;
 

@@ -24,12 +24,11 @@ class Factura {
     T TVA{};
 public:
     Factura() = default;
-    Factura(const std::shared_ptr<Persoana>& p, const Bilet& bt);
+    Factura(const std::shared_ptr<Persoana>& p, const Bilet& bt,const T tva);
     Factura(const Factura<T>& other);
-    friend std::ostream& operator<< <>(std::ostream& os,const Factura<T>& f);
+    friend std::ostream& operator<< <T>(std::ostream& os,const Factura<T>& f);
     friend void swap <>(Factura<T>& f1, Factura<T>& f2);
     Factura& operator=(const Factura<T>& other);
-    void setTva(T tva);
 };
 
 #endif //OOP_FACTURA_H
