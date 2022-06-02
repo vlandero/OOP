@@ -14,6 +14,8 @@ class Angajat : public Persoana {
 public:
     void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) override;
     void aplicareReducere(Bilet &b, std::ostream &out) override;
+    int reducereRestaurant() override;
+    int bugetMancare() override;
     void afisare(std::ostream &os) const override;
     void citire(std::istream &is,std::ostream &os) override;
     Angajat() = default;

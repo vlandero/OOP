@@ -20,6 +20,8 @@ public:
 
     virtual void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out);
     virtual void aplicareReducere(Bilet &b, std::ostream &out);
+    virtual int reducereRestaurant();
+    virtual int bugetMancare();
 
     Persoana(std::string nume_,std::string prenume_,int varsta, std::string CNP_,std::vector<Bilet>b);
     Persoana(const Persoana &other);

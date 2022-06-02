@@ -7,21 +7,29 @@
 #include "VIP.h"
 #include "Angajat.h"
 #include "Client.h"
-#include "Bilet.h"
 
+template <typename T>
+class Factura;
 
+template <typename T>
+std::ostream& operator<<(std::ostream& o, const Factura<T>& c);
+
+template <typename T>
+void swap(Factura<T>& f1, Factura<T>& f2);
+
+template <typename T>
 class Factura {
     std::shared_ptr<Persoana> pers;
     Bilet bilet;
-
+    T TVA{};
 public:
     Factura() = default;
     Factura(const std::shared_ptr<Persoana>& p, const Bilet& bt);
-    Factura(const Factura& other);
-    friend std::ostream& operator<<(std::ostream& os,const Factura& f);
-    friend void swap(Factura& f1, Factura& f2);
-    Factura& operator=(const Factura& other);
+    Factura(const Factura<T>& other);
+    friend std::ostream& operator<< <>(std::ostream& os,const Factura<T>& f);
+    friend void swap <>(Factura<T>& f1, Factura<T>& f2);
+    Factura& operator=(const Factura<T>& other);
+    void setTva(T tva);
 };
-
 
 #endif //OOP_FACTURA_H

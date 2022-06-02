@@ -59,4 +59,12 @@ void Angajat::aplicareReducere(Bilet &b, std::ostream &out) {
     b.setPret(pret);
 }
 
+int Angajat::reducereRestaurant() {
+    return 5;
+}
+
+int Angajat::bugetMancare() {
+    return 30;
+}
+
 Angajat::~Angajat() = default;

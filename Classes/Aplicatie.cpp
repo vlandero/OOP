@@ -36,7 +36,8 @@ void Aplicatie::run() {
         <<"3 - Vezi persoane inregistrate\n"
         <<"4 - Adauga persoana\n"
         <<"5 - Adauga bilet pentru o persoana\n"
-        <<"6 - Iesi din aplicatie\n";
+        <<"6 - Fa o rezervare pentru un restaurant din aeroport\n"
+        <<"7 - Iesi din aplicatie\n";
         std::cin>>input;
         switch (input) {
             case 1:
@@ -55,8 +56,12 @@ void Aplicatie::run() {
                 addBilet();
                 break;
             case 6:
+                rezerva();
+                break;
+            case 7:
                 running = false;
                 break;
+
             default:
                 std::cout<<"Nu ai introdus ce trebuie\n";
                 running = false;
@@ -75,15 +80,11 @@ Aplicatie &Aplicatie::createApp() {
 }
 
 void Aplicatie::checkAeroporturi() {
-    for(auto &a : aeroporturi){
-        std::cout<<a.second;
-    }
+    printMap<Aeroport,std::string>(aeroporturi);
 }
 
 void Aplicatie::checkZboruri() {
-    for(auto &zbor : zboruri){
-        std::cout<<zbor.second;
-    }
+    printMap<Zbor,unsigned long long>(zboruri);
 }
 
 void Aplicatie::checkPersoane() {
@@ -125,7 +126,8 @@ void Aplicatie::addBilet() {
         p->calculeazaPret(b,std::cin,std::cout);
         p->addBilet(b);
         bilete[b.getId()] = b;
-        Factura f{p,b};
+        Factura<int> f{p,b};
+        f.setTva(19);
         facturi[b.getId()] = f; //fiecare factura corespunde unui bilet, astfel fac conexiunea prin id
         std::cout<<f;
 
@@ -133,5 +135,32 @@ void Aplicatie::addBilet() {
     catch (eroare_consola& err){
         std::cout<<err.what()<<'\n';
     }
+}
+
+void Aplicatie::rezerva() {
+    std::string aeroport,restaurant;
+    std::cout<<"Introduceti ID-ul persoanei pe numele careia faceti rezervarea\n";
+    unsigned long long id;
+    std::cin>>id;
+    std::cin.get();
+    if(persoane.find(id) == persoane.end())
+    {
+        std::cout<<"ID inexistent\n";
+        return;
+    }
+    std::cout<<"Introduceti numarul de persoane pentru care se face rezervarea\n";
+    int nr;
+    std::cin>>nr;
+    std::cin.get();
+    std::cout<<"Introduceti aeroportul pentru care se face rezervarea\n";
+    std::getline(std::cin,aeroport);
+    std::cout<<"Introduceti restaurantul pentru care se face rezervarea\n";
+    std::getline(std::cin,restaurant); //daca ma gandeam de dinainte, faceam frumos un vector de restaurante in aeroport, dar acum nu mai am timp :))
+    builder_rezervare b;
+    Rezervare r = b.pers(persoane[id]->getNume()).nr_persoane(nr).reducere(persoane[id]->reducereRestaurant()).
+            buget(persoane[id]->bugetMancare()).aeroport(aeroport).restaurant(restaurant).build();
+    rezervari[r.getId()] = r;
+    std::cout<<r;
+
 }
 

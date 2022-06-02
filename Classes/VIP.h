@@ -13,7 +13,7 @@ class VIP : public Persoana {
 private:
     int nivel_VIP{};
     int buget_mancare{}; //per zbor, fie in aeroport, fie in avion extra
-    int discount_duty_free{};
+    int discount_duty_free{}; //se poate folosi si in restaurante
     double discount_zboruri{};
     int pretVIP{};
     int bagajeCala_incluse{};
@@ -21,6 +21,8 @@ private:
 public:
     void calculeazaPret(Bilet& b,std::istream &in, std::ostream &out) override;
     void aplicareReducere(Bilet &b, std::ostream &out) override;
+    int reducereRestaurant() override;
+    int bugetMancare() override;
     void afisare(std::ostream &os) const override;
     void citire(std::istream &is,std::ostream &os) override;
     VIP() = default;

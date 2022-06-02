@@ -145,3 +145,11 @@ void Persoana::aplicareReducere(Bilet &b, std::ostream &out) {
     b.setPret(pret);
 }
 
+int Persoana::reducereRestaurant() {
+    return 0;
+}
+
+int Persoana::bugetMancare() {
+    return 0;
+}
+

@@ -96,4 +96,12 @@ void VIP::aplicareReducere(Bilet &b, std::ostream &out) {
     b.setPret(pret);
 }
 
+int VIP::reducereRestaurant() {
+    return discount_duty_free;
+}
+
+int VIP::bugetMancare() {
+    return buget_mancare;
+}
+
 VIP::~VIP() = default;

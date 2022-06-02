@@ -32,13 +32,9 @@ void Aeroport::addPlecare(const Zbor& z) {
 std::ostream &operator<<(std::ostream &os, const Aeroport &a) {
     os<<a.nume<<" ("<<a.abreviere<<"), "<<a.locatie<<'\n';
     os<<"Plecari:\n";
-    for(auto &plecare : a.plecari){
-        os<<plecare;
-    }
+    printVec<Zbor>(a.plecari);
     os<<"Sosiri:\n";
-    for(auto &sosire : a.sosiri){
-        os<<sosire;
-    }
+    printVec<Zbor>(a.sosiri);
     os<<'\n';
     return os;
 }
