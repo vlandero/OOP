@@ -19,7 +19,6 @@ class Aplicatie {
     std::unordered_map<std::string,Aeroport>aeroporturi;
     std::unordered_map<unsigned long long,Bilet>bilete;
     std::unordered_map<unsigned long long,Zbor>zboruri;
-    std::unordered_map<unsigned long long,Factura<int>>facturi;
     std::unordered_map<unsigned long long,Rezervare>rezervari;
     Aplicatie() = default;
 

@@ -118,17 +118,27 @@ void Aplicatie::addBilet() {
         }
         auto p = persoane[ID];
         auto b = Bilet();
-        b.citire(std::cin,std::cout,aeroporturi);
-        if(b.getZboruri().empty()){
-            std::cout<<"Nu exista zboruri\n";
+        b.citire(std::cin, std::cout, aeroporturi);
+        if (b.getZboruri().empty()) {
+            std::cout << "Nu exista zboruri\n";
             return;
         }
-        p->calculeazaPret(b,std::cin,std::cout);
+        p->calculeazaPret(b, std::cin, std::cout);
         p->addBilet(b);
         bilete[b.getId()] = b;
-        Factura<int> f{p,b,19};
-        facturi[b.getId()] = f; //fiecare factura corespunde unui bilet, astfel fac conexiunea prin id
-        std::cout<<f;
+        std::cout << "Care este zona resedintei dumneavoastra? (UE, US, alta)\n";
+        std::string zona;
+        std::getline(std::cin, zona);
+        if (zona == "UE") {
+            Factura<int> f{p, b, 10};
+            std::cout << f;
+        } else if (zona == "US") {
+            Factura<double> f{p, b, 15.5};
+            std::cout << f;
+        } else {
+            Factura<int> f{p, b, 20};
+            std::cout << f;
+        }
 
     }
     catch (eroare_consola& err){

@@ -37,11 +37,18 @@ Factura<T> &Factura<T>::operator=(const Factura<T> &other) {
 template<typename T>
 void swap(Factura<T> &f1, Factura<T> &f2) {
     using std::swap;
-    swap(f1.pers,f2.pers);
-    swap(f1.bilet,f2.bilet);
+    swap(f1.pers, f2.pers);
+    swap(f1.bilet, f2.bilet);
 }
 
-template class Factura<int>;
+template
+class Factura<int>;
 
 template
-std::ostream& operator<< <>(std::ostream& o, const Factura<int>& x);
+std::ostream &operator<<<>(std::ostream &o, const Factura<int> &x);
+
+template
+class Factura<double>;
+
+template
+std::ostream &operator<<<>(std::ostream &o, const Factura<double> &x);
