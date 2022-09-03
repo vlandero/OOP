@@ -1,3 +1,11 @@
+# OOP College Project
+
+This is a complex project I created for the OOP course.
+The project presents a system which helps users buy fictional tickets for fictional flights all around the world (stored in a file, in a specific format). They can also check the tickets bought by a specific user as well as available flights from an airport to another.
+I used all of the 4 OOP principles (inheritance, abstraction, polymorphism, encapsulation) and also some design patterns (builder and singleton). The project is involved in a Continuous Integration system, created by an analyst, to compile and check our code on different machines. I've also made some tests for the CI system to run over 80% of the code to check for memory errors.
+
+Below are the requirements for the project, in Romanian, for the analyst that checked the project.
+
 # OOP Template
 
 ### Tema 0
